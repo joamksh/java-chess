@@ -71,6 +71,31 @@ public class ChessBoardTest {
         }
     }
 
+    @Test
+    void testWhiteWins() {
+        ChessBoard chessBoard = new ChessBoard();
+        try {
+            // 백색: 폰 e2 -> e4
+            chessBoard.movePiece("e2", "e4");
+            // 흑색: 폰 e7 -> e5
+            chessBoard.movePiece("e7", "e5");
+            // 백색: 퀸 d1 -> h5
+            chessBoard.movePiece("d1", "h5");
+            // 흑색: 나이트 b8 -> c6
+            chessBoard.movePiece("b8", "c6");
+            // 백색: 퀸 h5 -> f7 (체크메이트)
+            chessBoard.movePiece("h5", "f7");
+
+            chessBoard.printBoard();
+
+            List<List<String>> board = chessBoard.getBoard();
+            assertEquals("q", board.get(1).get(5)); // f7에 백색 퀸이 있어야 함
+            assertEquals("K", board.get(0).get(4)); // 흑색 킹이 e8에 있어야 함 (체크메이트 상태)
+        } catch (InvalidCommandException e) {
+            fail("유효한 이동에서 예외 발생: " + e.getMessage());
+        }
+    }
+
 
 }
 
