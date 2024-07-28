@@ -31,4 +31,32 @@ public class ChessBoard {
         }
 //        System.out.println("abcdefgh");
     }
+
+    public void movePiece(String source, String target) throws InvalidCommandException {
+        int[] sourcePos = convertPosition(source);
+        int[] targetPos = convertPosition(target);
+
+        if (!isValidMove(sourcePos, targetPos)) {
+            throw new InvalidCommandException("유효하지 않은 이동: " + source + "에서 " + target + "로");
+        }
+
+        String piece = board.get(sourcePos[0]).get(sourcePos[1]);
+        if (piece.equals(".")) {
+            throw new InvalidCommandException("출발 위치에 말이 없습니다: " + source);
+        }
+
+        board.get(sourcePos[0]).set(sourcePos[1], ".");
+        board.get(targetPos[0]).set(targetPos[1], piece);
+    }
+
+    private int[] convertPosition(String position) {
+        char file = position.charAt(0);
+        int rank = position.charAt(1) - '1';
+        int fileIndex = file - 'a';
+        return new int[]{7 - rank, fileIndex};
+    }
+
+    private boolean isValidMove(int[] sourcePos, int[] targetPos) {
+        return true;
+    }
 }
