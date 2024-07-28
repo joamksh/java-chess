@@ -26,8 +26,9 @@ public class ChessBoard {
             for (int j = 0; j < 8; j++) {
                 System.out.print(board.get(i).get(j));
             }
-            System.out.println(" " + (i + 1)); // Print rank numbers
+            System.out.println(" ");
+//            System.out.println(" " + (i + 1));
         }
-        System.out.println("abcdefgh"); // Print file letters
+//        System.out.println("abcdefgh");
     }
 }
