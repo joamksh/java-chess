@@ -27,4 +27,11 @@ public class ChessBoardTest {
         }
     }
 
+    @Test
+    public void testPrintBoard() {
+        ChessBoard chessBoard = new ChessBoard();
+        chessBoard.printBoard();
+        // 콘솔 출력을 수동으로 확인하거나 콘솔 출력을 캡처하고 assert 하는 라이브러리 사용
+    }
+
 }
