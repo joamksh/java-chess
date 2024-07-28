@@ -43,8 +43,13 @@ public class ChessBoard {
         }
 
         String piece = board.get(sourcePos[0]).get(sourcePos[1]);
+        String targetPiece = board.get(targetPos[0]).get(targetPos[1]);
         if (piece.equals(".")) {
             throw new InvalidCommandException("출발 위치에 말이 없습니다: " + source);
+        }
+
+        if (isSameColor(piece, targetPiece)) {
+            throw new InvalidCommandException("같은 색의 말이 있습니다: " + target);
         }
 
         board.get(sourcePos[0]).set(sourcePos[1], "."); // 출발 위치를 비움
@@ -72,6 +77,14 @@ public class ChessBoard {
     private boolean isValidMove(int[] sourcePos, int[] targetPos) {
         // 간단한 이동 유효성 검사, 실제 체스 규칙을 반영하려면 더 복잡한 로직 필요
         return true;
+    }
+
+    private boolean isSameColor(String piece, String targetPiece) {
+        if (piece.equals(".") || targetPiece.equals(".")) {
+            return false;
+        }
+        return (Character.isUpperCase(piece.charAt(0)) && Character.isUpperCase(targetPiece.charAt(0))) ||
+                (Character.isLowerCase(piece.charAt(0)) && Character.isLowerCase(targetPiece.charAt(0)));
     }
 
     public void printBeforeMove(String source, String target) {

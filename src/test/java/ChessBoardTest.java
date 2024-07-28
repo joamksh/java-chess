@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-
+//import org.junit.Test;
 import java.util.List;
 
 public class ChessBoardTest {
@@ -47,4 +47,36 @@ public class ChessBoardTest {
         }
     }
 
+    @Test
+    void testCaptureDifferentColor() {
+        ChessBoard chessBoard = new ChessBoard();
+        try {
+            chessBoard.movePiece("b2", "b3"); // 백색 폰 이동
+            chessBoard.movePiece("b7", "b6"); // 흑색 폰 이동
+            chessBoard.movePiece("b3", "b4"); // 백색 폰 이동
+            chessBoard.movePiece("b6", "b5"); // 흑색 폰 이동
+            chessBoard.movePiece("b4", "b5"); // 백색 폰이 흑색 폰을 캡처
+            chessBoard.printBoard();
+            List<List<String>> board = chessBoard.getBoard();
+
+            // 이동 후 체스판 상태를 확인
+            assertEquals(".", board.get(6).get(1)); // b2
+            assertEquals(".", board.get(5).get(1)); // b3
+            assertEquals(".", board.get(4).get(1)); // b4
+            assertEquals("p", board.get(3).get(1)); // b5
+            assertEquals(".", board.get(2).get(1)); // b6
+            assertEquals(".", board.get(1).get(1)); // b7
+        } catch (InvalidCommandException e) {
+            fail("유효한 이동에서 예외 발생: " + e.getMessage());
+        }
+    }
+
+
 }
+
+
+
+
+
+
+
