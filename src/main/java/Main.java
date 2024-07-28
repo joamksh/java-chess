@@ -7,10 +7,16 @@ public class Main {
 
         while (true) {
             String command = scanner.nextLine();
-            if (command.equalsIgnoreCase("start")) {
-                chessBoard.printBoard();
-            } else if (command.equalsIgnoreCase("end")) {
-                break;
+            try {
+                if (command.equalsIgnoreCase("start")) {
+                    chessBoard.printBoard();
+                } else if (command.equalsIgnoreCase("end")) {
+                    break;
+                } else {
+                    throw new InvalidCommandException("잘못된 명령어: " + command);
+                }
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
             }
         }
         scanner.close();
