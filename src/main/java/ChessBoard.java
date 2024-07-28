@@ -32,6 +32,9 @@ public class ChessBoard {
     }
 
     public void movePiece(String source, String target) throws InvalidCommandException {
+        validatePosition(source);
+        validatePosition(target);
+
         int[] sourcePos = convertPosition(source);
         int[] targetPos = convertPosition(target);
 
@@ -46,6 +49,17 @@ public class ChessBoard {
 
         board.get(sourcePos[0]).set(sourcePos[1], "."); // 출발 위치를 비움
         board.get(targetPos[0]).set(targetPos[1], piece); // 목표 위치에 말 이동
+    }
+
+    private void validatePosition(String position) throws InvalidCommandException {
+        if (position.length() != 2) {
+            throw new InvalidCommandException("잘못된 위치: " + position);
+        }
+        char file = position.charAt(0);
+        char rank = position.charAt(1);
+        if (file < 'a' || file > 'h' || rank < '1' || rank > '8') {
+            throw new InvalidCommandException("잘못된 위치: " + position);
+        }
     }
 
     private int[] convertPosition(String position) {

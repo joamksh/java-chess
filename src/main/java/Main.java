@@ -6,13 +6,14 @@ public class Main {
         ChessBoard chessBoard = new ChessBoard();
 
         while (true) {
+            System.out.print("명령어를 입력하세요: ");
             String command = scanner.nextLine();
             try {
                 if (processCommand(command, chessBoard)) {
                     break;
                 }
             } catch (InvalidCommandException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + " 다시 입력하세요.");
             }
         }
         scanner.close();
